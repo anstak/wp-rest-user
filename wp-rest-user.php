@@ -70,7 +70,8 @@ function wc_rest_user_endpoint_handler($request = null) {
 			$user->set_role('subscriber');
 
 			// Ger User Data (Non-Sensitive, Pass to front end.)
-			$response = $user;
+			$response['code'] = 200;
+			$response['message'] = __("User" . $username . " Registration was Successful", "wp-rest-user");
 			return $user;
 		} else {
 			return $user_id;
