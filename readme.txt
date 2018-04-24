@@ -12,81 +12,45 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 WP REST User adds in the 'User Registration' function for REST API.
  
 == Description ==
- 
-The `filter` argument in WP REST API allows the posts to be filtered using `WP_Query` public query vars. 
 
-Since WordPress 4.7 the `filter` argument for any post endpoint was removed. 
+If you wish to 'Register User' using REST API, *without* exposing Administrator credentials to the Front End application, you are at the right place. Since WordPress 4.7, REST API was natively included in WordPress. 
 
-This plugin restores the `filter` parameter for websites that were previously using it.
+In order to 'Register User', the authentication for a user with 'Administrator' role is required. While this is a delibrately done for security reasons, such implementation makes it very hard for Front End applications to implement a simple 'Register' or 'Sign Up' function.
+
+This plugin fullfills such requirement by extending the existing WordPress REST API endpoints. 
 
 = Usage =
 
-Use the `filter` parameter on any Post, or Custom Post Type endpoint such as `/wp/v2/posts` or `/wp/v2/cpt` as an array of `WP_Query`
-argument. ACF values are also supported. 
+Send a POST request to /wp-json/wp/v2/users/register, including a JSON body with three keys: username, email and password.
 
-Default Post:
-```
-fetch( 'https://domain.com/wp-json/wp/v2/posts?filter[meta_key]=acfkey&filter[meta_value]=acfvalue');
-```
-
-Custom Post Type
-```
-fetch( 'https://domain.com/wp-json/wp/v2/cars?filter[meta_key]=currency&filter[meta_value]=AUD'); // here 'cars' is the endpoint for CPT
-```
-
-Advanced Custom Field
-```
-fetch( 'https://domain.com/wp-json/wp/v2/cars?filter[meta_key]=price&filter[meta_compare]=<&filter[meta_value]=200000'); // Query for car 'less' than '200000' in 'price'
-```
-
-Advanced Custom Field - Date (before, equal & after)
-```
-fetch( 'https://domain.com/wp-json/wp/v2/cars?filter[meta_key]=expiry_date&filter[meta_value]=2018-12-27T23:59:59&filter[meta_compare]=< // 'Expiry' Before '2018 Boxing Day ends'
-```
-
-Multiple Meta Queries
-```
-fetch( 'https://domain.com/wp-json/wp/v2/cars?filter[meta_query][0][key]=currency&filter[meta_query][0][value]&filter[meta_query][1][key]=country&filter[meta_query][1][value]=Australia'); // here 'cars' is the endpoint for CPT
-```
-
-
+See the Screenshot below for POSTMAN demo:
  
 == Installation ==
   
-1. Upload `wp-api-filter.php` to the `/wp-content/plugins/` directory
+1. Upload `wp-rest-user` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
  
 == Frequently Asked Questions ==
  
 = Why do I need WP REST User? =
  
-If you're planning on using your WordPress website as a Backend, and you're consuming RESTful api, you'll most probably need to filter results on your GET request. This is precisely what this plugin does.
+If you're planning on using your WordPress website as a Backend, and you're consuming RESTful api, you'll most probably need to Register User via REST API. This is precisely what this plugin does.
 
-= Can I filter for multiple meta queries? =
+= Is it secure? =
 
-YES! See Description.
+Great question! For the time being, this plugin only allows registering user as 'subscriber' role. 'Subscriber' role has very limited capability in terms what WordPress allows him/her to do. From our perspective, subscribers are quite harmless.
 
-= Can I Use this plugin to find posts by tags/categories? =
+= Does it work with WooCommerce? =
 
-Yes, however this is natively supported by WordPress 4.7+. This plugin is not necessary if you¡¯re looking to find posts by tags/categories.
-
-For more info, please [see this topic](https://wordpress.org/support/topic/empty-response-2/).
- 
-= Does this work with Custom Post Type? =
- 
-Yes! This plugin is designed to work with CPT types too!
- 
-= Does this work with Advanced Custom Field? =
- 
-Yes! This plugin is designed to work with ACF values too!
+Another great question! By default, WordPress registers new user as 'Subscriber', while WooCommerce registers new user as 'Customer'. At the moment this plugin is registering WordPress user as 'Subscriber' only. WooCommerce 'Customer' support is on the roadmap. Coming soon!
  
 = There's a bug, what do I do? =
 
-Issues and [pull requests](https://github.com/sk8-pty-ltd/wp-rest-filter/pulls) are welcome at [Github repo](https://github.com/sk8-pty-ltd/wp-rest-filter).
+Issues and [pull requests](https://github.com/sk8-pty-ltd/wp-rest-user/pulls) are welcome at [Github repo](https://github.com/sk8-pty-ltd/wp-rest-user).
  
 == Screenshots ==
  
-1. An sample REST API GET request using [WP REST User](https://wordpress.org/plugins/wp-rest-filter/).
+1. An sample REST API POST request using [WP REST User](https://wordpress.org/plugins/wp-rest-user/).
  
 == Changelog ==
  
