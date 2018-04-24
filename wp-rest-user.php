@@ -21,7 +21,7 @@ function wp_rest_user_endpoints($request) {
 	/**
 	 * Handle Register User request.
 	 */
-	register_rest_route('wp/v2', 'user', array(
+	register_rest_route('wp/v2', 'users/register', array(
 		'methods' => 'POST',
 		'callback' => 'wc_rest_user_endpoint_handler',
 	));
