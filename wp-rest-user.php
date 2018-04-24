@@ -65,7 +65,7 @@ function wc_rest_user_endpoint_handler($request = null) {
 		$user_id = wp_create_user($username, $password, $email);
 		if (!is_wp_error($user_id)) {
 			// Ger User Meta Data (Sensitive, Password included. DO NOT pass to front end.)
-			$user = get_userdata('id', $user_id);
+			$user = get_user_by('id', $user_id);
 			// $user->set_role($role);
 			$user->set_role('subscriber');
 
