@@ -69,6 +69,11 @@ function wc_rest_user_endpoint_handler($request = null) {
 			// $user->set_role($role);
 			$user->set_role('subscriber');
 
+			// WooCommerce specific code
+			if (class_exists('WooCommerce')) {
+				$user->set_role('customer');
+			}
+
 			// Ger User Data (Non-Sensitive, Pass to front end.)
 			$response['code'] = 200;
 			$response['message'] = __("User '" . $username . "' Registration was Successful", "wp-rest-user");
