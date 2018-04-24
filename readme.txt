@@ -42,7 +42,8 @@ Great question! For the time being, this plugin only allows registering user as 
 
 = Does it work with WooCommerce? =
 
-Another great question! By default, WordPress registers new user as 'Subscriber', while WooCommerce registers new user as 'Customer'. At the moment this plugin is registering WordPress user as 'Subscriber' only. WooCommerce 'Customer' support is on the roadmap. Coming soon!
+Another great question! By default, WordPress registers new user as 'subscriber', while WooCommerce registers new user as 'customer'. 
+If you have WooCommerce installed and activated on your WordPress website, this plugin will automatically register user as 'customer' as well.
  
 = There's a bug, what do I do? =
 
