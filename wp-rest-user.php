@@ -38,15 +38,15 @@ function wc_rest_user_endpoint_handler($request = null) {
 	$error = new WP_Error();
 
 	if (empty($username)) {
-		$error->add(400, __("Username field 'username' is required.", 'wp_rest_user'), array('status' => 400));
+		$error->add(400, __("Username field 'username' is required.", 'wp-rest-user'), array('status' => 400));
 		return $error;
 	}
 	if (empty($email)) {
-		$error->add(401, __("Email field 'email' is required.", 'wp_rest_user'), array('status' => 400));
+		$error->add(401, __("Email field 'email' is required.", 'wp-rest-user'), array('status' => 400));
 		return $error;
 	}
 	if (empty($password)) {
-		$error->add(404, __("Password field 'password' is required.", 'wp_rest_user'), array('status' => 400));
+		$error->add(404, __("Password field 'password' is required.", 'wp-rest-user'), array('status' => 400));
 		return $error;
 	}
 	// if (empty($role)) {
@@ -70,13 +70,13 @@ function wc_rest_user_endpoint_handler($request = null) {
 			$user->set_role('subscriber');
 
 			// Ger User Data (Non-Sensitive, Pass to front end.)
-			// $userdata = get_userdata($user_id);
+			$response = $user;
 			return $user;
 		} else {
 			return $user_id;
 		}
 	} else {
-		$error->add(406, __("Email already exists, please try 'Reset Password'", 'wp_rest_user'), array('status' => 400));
+		$error->add(406, __("Email already exists, please try 'Reset Password'", 'wp-rest-user'), array('status' => 400));
 		return $error;
 	}
 
