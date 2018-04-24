@@ -71,7 +71,7 @@ function wc_rest_user_endpoint_handler($request = null) {
 
 			// Ger User Data (Non-Sensitive, Pass to front end.)
 			$response['code'] = 200;
-			$response['message'] = __("User" . $username . " Registration was Successful", "wp-rest-user");
+			$response['message'] = __("User '" . $username . "' Registration was Successful", "wp-rest-user");
 		} else {
 			return $user_id;
 		}
