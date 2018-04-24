@@ -70,8 +70,8 @@ function wc_rest_user_endpoint_handler($request = null) {
 			$user->set_role('subscriber');
 
 			// Ger User Data (Non-Sensitive, Pass to front end.)
-			$userdata = get_userdata($user_id);
-			return $userdata;
+
+			return $user;
 		} else {
 			return $user_id;
 		}
