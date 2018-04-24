@@ -51,7 +51,7 @@ function wc_rest_user_endpoint_handler($request = null) {
 		return $error;
 	}
 	// if (empty($role)) {
-	// 	$role = 'subscriber'
+	// 	$role = 'subscriber';
 	// } else {
 	//     if ($GLOBALS['wp_roles']->is_role($role)) {
 	//     	// Silence is gold
@@ -68,9 +68,9 @@ function wc_rest_user_endpoint_handler($request = null) {
 			$user = get_user_by('id', $user_id);
 			// $user->set_role($role);
 			$user->set_role('subscriber');
-			return $user
+			return $user;
 		} else {
-			return $user_id
+			return $user_id;
 		}
 	} else {
 		$error->add(406, __("Email already exists, please try 'Reset Password'", 'wp_rest_user'), array('status' => 400));
