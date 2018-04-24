@@ -13,11 +13,10 @@ add_action('rest_api_init', 'wp_rest_user_endpoints');
 /**
  * Register a new user
  *
- * @param  array           $args    The query arguments.
  * @param  WP_REST_Request $request Full details about the request.
  * @return array $args.
  **/
-function wp_rest_user_endpoints($args, $request) {
+function wp_rest_user_endpoints($request) {
 
 	/**
 	 * Handle Register User request.
