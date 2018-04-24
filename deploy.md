@@ -1,4 +1,4 @@
-# wp-rest-filter.php
+# wp-rest-user.php
 
 Update 'Version' number to x.x.x
 
