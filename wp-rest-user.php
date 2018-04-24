@@ -50,10 +50,10 @@ function wc_rest_user_endpoint_handler($request = null) {
 		$error->add(404, __("Password field 'password' is required.", 'wp_rest_user'), array('status' => 400));
 		return $error;
 	}
-	if (empty( $role ) ) {
+	if (empty($role)) {
 		$role = 'subscriber'
 	} else {
-	    if ($GLOBALS['wp_roles']->is_role( $role )) {
+	    if ($GLOBALS['wp_roles']->is_role($role)) {
 	    	// Silence is gold
 	    } else {
 			$error->add(405, __("Role field 'role' is not a valid. Check your User Roles from Dashboard.", 'wp_rest_user'), array('status' => 400));
