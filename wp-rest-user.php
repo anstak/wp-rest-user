@@ -4,7 +4,7 @@
  * Description: WP REST User adds in the 'User Registration' function for REST API.
  * Author: SK8Tech
  * Author URI: https://sk8.tech
- * Version: 1.0.0
+ * Version: 1.0.1
  * License: GPL2+
  **/
 
