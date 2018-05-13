@@ -55,6 +55,43 @@ class Wp_Rest_User_Admin {
 	}
 
 	/**
+	 * Custom option and settings
+	 *
+	 * @author Jack
+	 *
+	 * @see https://developer.wordpress.org/plugins/settings/custom-settings-page/
+	 *
+	 * @since    1.1.1
+	 */
+	function wporg_settings_init() {
+		// register a new setting for "wporg" page
+		register_setting('wporg', 'wporg_options');
+
+		// register a new section in the "wporg" page
+		add_settings_section(
+			'wporg_section_developers',
+			__('The Matrix has you.', 'wporg'),
+			'wporg_section_developers_cb',
+			'wporg'
+		);
+
+		// register a new field in the "wporg_section_developers" section, inside the "wporg" page
+		add_settings_field(
+			'wporg_field_pill', // as of WP 4.6 this value is used only internally
+			// use $args' label_for to populate the id inside the callback
+			__('Pill', 'wporg'),
+			'wporg_field_pill_cb',
+			'wporg',
+			'wporg_section_developers',
+			[
+				'label_for' => 'wporg_field_pill',
+				'class' => 'wporg_row',
+				'wporg_custom_data' => 'custom',
+			]
+		);
+	}
+
+	/**
 	 * Add Admin Menu
 	 *
 	 * @author Jack
@@ -77,8 +114,8 @@ class Wp_Rest_User_Admin {
 			'WP REST User - Registration',
 			'REST User',
 			'manage_options',
-			'partials/wp-rest-user-admin-display.php',
-			'myplguin_admin_page'
+			'wp-rest-user',
+			'partials/wp-rest-user-admin-display.php'
 		);
 
 	}
