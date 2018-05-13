@@ -112,7 +112,7 @@ class Wp_Rest_User_Admin {
 			'My Options 2',
 			'My Plugin 2',
 			'manage_options',
-			'my-plugin.php',
+			'my-plugin',
 			'wptreehouse_badges_option_page'
 		);
 		add_options_page(
