@@ -1,89 +1,82 @@
 <?php
-/**
- * Plugin Name: WP REST User
- * Description: WP REST User adds in the 'User Registration' function for REST API.
- * Author: SK8Tech
- * Author URI: https://sk8.tech
- * Version: 1.0.1
- * License: GPL2+
- **/
-
-add_action('rest_api_init', 'wp_rest_user_endpoints');
 
 /**
- * Register a new user
+ * The plugin bootstrap file
  *
- * @param  WP_REST_Request $request Full details about the request.
- * @return array $args.
- **/
-function wp_rest_user_endpoints($request) {
+ * This file is read by WordPress to generate the plugin information in the plugin
+ * admin area. This file also includes all of the dependencies used by the plugin,
+ * registers the activation and deactivation functions, and defines a function
+ * that starts the plugin.
+ *
+ * @link              https://sk8.tech
+ * @since             1.1.0
+ * @package           Wp_Rest_User
+ *
+ * @wordpress-plugin
+ * Plugin Name:       WP REST User
+ * Plugin URI:        https://sk8.tech
+ * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Version:           1.1.0
+ * Author:            SK8Tech
+ * Author URI:        https://sk8.tech
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       wp-rest-user
+ * Domain Path:       /languages
+ */
 
-	/**
-	 * Handle Register User request.
-	 */
-	register_rest_route('wp/v2', 'users/register', array(
-		'methods' => 'POST',
-		'callback' => 'wc_rest_user_endpoint_handler',
-	));
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+	die;
 }
 
-function wc_rest_user_endpoint_handler($request = null) {
+/**
+ * Currently plugin version.
+ * Start at version 1.1.0 and use SemVer - https://semver.org
+ * Rename this for your plugin and update it as you release new versions.
+ */
+define('PLUGIN_NAME_VERSION', '1.1.0');
 
-	$response = array();
-	$parameters = $request->get_json_params();
-	$username = sanitize_text_field($parameters['username']);
-	$email = sanitize_text_field($parameters['email']);
-	$password = sanitize_text_field($parameters['password']);
-	// $role = sanitize_text_field($parameters['role']);
-	$error = new WP_Error();
-
-	if (empty($username)) {
-		$error->add(400, __("Username field 'username' is required.", 'wp-rest-user'), array('status' => 400));
-		return $error;
-	}
-	if (empty($email)) {
-		$error->add(401, __("Email field 'email' is required.", 'wp-rest-user'), array('status' => 400));
-		return $error;
-	}
-	if (empty($password)) {
-		$error->add(404, __("Password field 'password' is required.", 'wp-rest-user'), array('status' => 400));
-		return $error;
-	}
-	// if (empty($role)) {
-	// 	$role = 'subscriber';
-	// } else {
-	//     if ($GLOBALS['wp_roles']->is_role($role)) {
-	//     	// Silence is gold
-	//     } else {
-	// 		$error->add(405, __("Role field 'role' is not a valid. Check your User Roles from Dashboard.", 'wp_rest_user'), array('status' => 400));
-	// 		return $error;
-	//     }
-	// }
-
-	$user_id = username_exists($username);
-	if (!$user_id && email_exists($email) == false) {
-		$user_id = wp_create_user($username, $password, $email);
-		if (!is_wp_error($user_id)) {
-			// Ger User Meta Data (Sensitive, Password included. DO NOT pass to front end.)
-			$user = get_user_by('id', $user_id);
-			// $user->set_role($role);
-			$user->set_role('subscriber');
-
-			// WooCommerce specific code
-			if (class_exists('WooCommerce')) {
-				$user->set_role('customer');
-			}
-
-			// Ger User Data (Non-Sensitive, Pass to front end.)
-			$response['code'] = 200;
-			$response['message'] = __("User '" . $username . "' Registration was Successful", "wp-rest-user");
-		} else {
-			return $user_id;
-		}
-	} else {
-		$error->add(406, __("Email already exists, please try 'Reset Password'", 'wp-rest-user'), array('status' => 400));
-		return $error;
-	}
-
-	return new WP_REST_Response($response, 123);
+/**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-wp-rest-user-activator.php
+ */
+function activate_wp_rest_user() {
+	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-rest-user-activator.php';
+	Wp_Rest_User_Activator::activate();
 }
+
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-wp-rest-user-deactivator.php
+ */
+function deactivate_wp_rest_user() {
+	require_once plugin_dir_path(__FILE__) . 'includes/class-wp-rest-user-deactivator.php';
+	Wp_Rest_User_Deactivator::deactivate();
+}
+
+register_activation_hook(__FILE__, 'activate_wp_rest_user');
+register_deactivation_hook(__FILE__, 'deactivate_wp_rest_user');
+
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path(__FILE__) . 'includes/class-wp-rest-user.php';
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.1.0
+ */
+function run_wp_rest_user() {
+
+	$plugin = new Wp_Rest_User();
+	$plugin->run();
+
+}
+run_wp_rest_user();
