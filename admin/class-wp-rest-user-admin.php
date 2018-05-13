@@ -102,28 +102,14 @@ class Wp_Rest_User_Admin {
 	 */
 	public function add_settings_menu() {
 		add_options_page(
-			'My Options 2',
-			'My Plugin 2',
-			'manage_options',
-			$this->plugin_name,
-			array($this, 'wptreehouse_badges_option_page')
-		);
 		add_options_page(
 			'WP REST User - Registration',
 			'REST User',
 			'manage_options',
 			$this->plugin_name,
-			'partials/wp-rest-user-admin-display.php',
-			'myplguin_admin_page'
+			array($'partials/wp-rest-user-admin-display.php', 'admin_page')
 		);
 
-	}
-
-	public function wptreehouse_badges_option_page() {
-		if (!current_user_can('manage_options')) {
-			wp_die('You do not have sufficient permission to acces this page.');
-		}
-		echo '<p> welcome to our plugin page </p>';
 	}
 
 	/**

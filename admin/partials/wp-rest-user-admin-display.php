@@ -15,7 +15,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <?php
-function myplguin_admin_page() {
+function admin_page() {
 	?>
 	<div class="wrap">
 		<h2>Welcome To My Plugin</h2>
