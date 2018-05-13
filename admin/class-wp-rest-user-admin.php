@@ -102,11 +102,18 @@ class Wp_Rest_User_Admin {
 	 */
 	public function add_settings_menu() {
 		add_options_page(
+			'My Options',
+			'My Plugin',
+			'manage_options',
+			'my-plugin.php',
+			'my_plugin_page'
+		);
+		add_options_page(
 			'WP REST User - Registration',
 			'REST User',
 			'manage_options',
-			'wp-rest-user',
-			plugin_dir_url(__FILE__) . 'partials/wp-rest-user-admin-display.php'
+			plugin_dir_url(__FILE__) . 'partials/wp-rest-user-admin-display.php',
+			'wp-rest-user'
 		);
 
 	}
