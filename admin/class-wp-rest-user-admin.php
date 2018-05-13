@@ -105,14 +105,14 @@ class Wp_Rest_User_Admin {
 			'My Options 2',
 			'My Plugin 2',
 			'manage_options',
-			'my-plugin',
-			'wptreehouse_badges_option_page'
+			$this->plugin_name,
+			array($this, 'wptreehouse_badges_option_page')
 		);
 		add_options_page(
 			'WP REST User - Registration',
 			'REST User',
 			'manage_options',
-			'wp-rest-user',
+			$this->plugin_name,
 			'partials/wp-rest-user-admin-display.php',
 			'myplguin_admin_page'
 		);
