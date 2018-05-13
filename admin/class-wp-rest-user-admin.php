@@ -106,7 +106,7 @@ class Wp_Rest_User_Admin {
 			'My Plugin',
 			'manage_options',
 			'my-plugin.php',
-			'myplguin_admin_page'
+			'wporg_options_page_html'
 		);
 		add_options_page(
 			'WP REST User - Registration',
