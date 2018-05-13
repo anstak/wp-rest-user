@@ -54,6 +54,14 @@ Issues and [pull requests](https://github.com/sk8-pty-ltd/wp-rest-user/pulls) ar
 1. An sample REST API POST request using [WP REST User](https://wordpress.org/plugins/wp-rest-user/).
  
 == Changelog ==
+
+= 1.2.0 = 
+
+* Now supports more roles, including
+	1. subscriber
+	1. customer
+	1. contributor
+	1. custom roles
  
 = 1.1.0 =
 * Now supports 'Customer' role to be registered, if WooCommerce plugin is installed 
