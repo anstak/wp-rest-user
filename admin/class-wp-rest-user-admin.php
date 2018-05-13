@@ -66,6 +66,7 @@ class Wp_Rest_User_Admin {
 	public function add_menu() {
 		add_menu_page('My Top Level Menu Example', 'Top Level Menu', 'manage_options', 'myplugin/myplugin-admin-page.php', 'myplguin_admin_page', 'dashicons-tickets', 6);
 		add_submenu_page('myplugin/myplugin-admin-page.php', 'My Sub Level Menu Example', 'Sub Level Menu', 'manage_options', 'myplugin/myplugin-admin-sub-page.php', 'myplguin_admin_sub_page');
+		add_options_page('partials/wp-rest-user-admin-display.php', 'WP REST User', 'REST User', 'wp_rest_user_options', 'partials/wp-rest-user-admin-display.php', 'wp_rest_user_sub_page')
 	}
 
 	/**
