@@ -17,8 +17,8 @@ Update version number in /wp-rest-user.php
 > svn co https://plugins.svn.wordpress.org/wp-rest-user temp
 ## Copy every file from git repository to temp/trunk
 > cp -R ./* temp/trunk/
-## Copy files to temp/tags folder for release, using svn
-> svn cp trunk tags/x.x.x
+## Manually Copy files to temp/tags folder for release
+## Use SVN to commit new release
 > svn ci -m "Release x.x.x"
 
 

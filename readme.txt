@@ -55,7 +55,11 @@ Issues and [pull requests](https://github.com/sk8-pty-ltd/wp-rest-user/pulls) ar
  
 == Changelog ==
  
-= 1.0.0 =
+= 1.1.0 =
+* Now supports 'Customer' role to be registered, if WooCommerce plugin is installed 
+* Restructured Plugin for future development.
+ 
+= 1.0.1 =
 * Initial Release. 
 * Only user with 'Subscriber' role can be created.
 * Only 'username', 'email', 'password' fields are accepted.
