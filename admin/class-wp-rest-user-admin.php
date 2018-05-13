@@ -109,6 +109,13 @@ class Wp_Rest_User_Admin {
 			'wporg_options_page_html'
 		);
 		add_options_page(
+			'My Options 2',
+			'My Plugin 2',
+			'manage_options',
+			'my-plugin.php',
+			'wptreehouse_badges_option_page'
+		);
+		add_options_page(
 			'WP REST User - Registration',
 			'REST User',
 			'manage_options',
@@ -117,6 +124,13 @@ class Wp_Rest_User_Admin {
 			'myplguin_admin_page'
 		);
 
+	}
+
+	function wptreehouse_badges_option_page() {
+		if (!current_user_can('manage_options')) {
+			wp_die('You do not have sufficient permission to acces this page.');
+		}
+		echo '<p> welcome to our plugin page </p>';
 	}
 
 /**
