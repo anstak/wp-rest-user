@@ -63,7 +63,7 @@ class Wp_Rest_User_Public {
 		 */
 		register_rest_route('wp/v2', 'users/register', array(
 			'methods' => 'POST',
-			'callback' => 'register_user',
+			'callback' => array($this, 'register_user'),
 		));
 	}
 
