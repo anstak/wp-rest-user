@@ -63,10 +63,26 @@ class Wp_Rest_User_Admin {
 	 *
 	 * @since    1.1.1
 	 */
-	public function add_menu() {
+	public function add_settings_menu() {
 		add_menu_page('My Top Level Menu Example', 'Top Level Menu', 'manage_options', 'myplugin/myplugin-admin-page.php', 'myplguin_admin_page', 'dashicons-tickets', 6);
 		add_submenu_page('myplugin/myplugin-admin-page.php', 'My Sub Level Menu Example', 'Sub Level Menu', 'manage_options', 'myplugin/myplugin-admin-sub-page.php', 'myplguin_admin_sub_page');
-		add_options_page('partials/wp-rest-user-admin-display.php', 'WP REST User', 'REST User', 'wp_rest_user_options', 'partials/wp-rest-user-admin-display.php', 'myplguin_admin_page');
+		add_options_page(
+			'My Options',
+			'My Plugin',
+			'manage_options',
+			'my-plugin.php',
+			'my_plugin_page'
+		);
+		add_options_page(
+			'partials/wp-rest-user-admin-display.php',
+			'WP REST User',
+			'REST User',
+			'wp_rest_user_options',
+			array(
+				'partials/wp-rest-user-admin-display.php',
+				'myplguin_admin_page')
+		);
+
 	}
 
 	/**
