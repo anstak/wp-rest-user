@@ -74,13 +74,11 @@ class Wp_Rest_User_Admin {
 			'my_plugin_page'
 		);
 		add_options_page(
-			'partials/wp-rest-user-admin-display.php',
-			'WP REST User',
+			'WP REST User - Registration',
 			'REST User',
-			'wp_rest_user_options',
-			array(
-				'partials/wp-rest-user-admin-display.php',
-				'myplguin_admin_page')
+			'manage_options',
+			'partials/wp-rest-user-admin-display.php',
+			'myplguin_admin_page'
 		);
 
 	}
