@@ -141,7 +141,7 @@ class Wp_Rest_User_Public {
 			return $error;
 		}
 
-		return new WP_REST_Response($response, 123);
+		return new WP_REST_Response($response, 200);
 	}
 
 	/**

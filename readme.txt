@@ -55,6 +55,10 @@ Issues and [pull requests](https://github.com/sk8-pty-ltd/wp-rest-user/pulls) ar
  
 == Changelog ==
 
+= 1.2.1 = 
+
+* Changed success status code from 123 to 200
+
 = 1.2.0 = 
 
 * Now supports more roles, including
