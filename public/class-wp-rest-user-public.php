@@ -101,11 +101,16 @@ class Wp_Rest_User_Public {
 			return $error;
 		}
 		if (empty($role)) {
-			$role = 'subscriber';
+			// WooCommerce specific code
+			if (class_exists('WooCommerce')) {
+				$role = 'customer';
+			} else {
+				$role = 'subscriber';
+			}
 		} else {
 			if ($GLOBALS['wp_roles']->is_role($role)) {
 				if ($role == 'administrator' || $role == 'Editor' || $role == 'Author') {
-					$error->add(406, __($role . "Role field 'role' is not a permitted. Only 'contributor', 'subscriber' and your custom roles are allowed.", 'wp_rest_user'), array('status' => 400));
+					$error->add(406, __($"Role field 'role' is not a permitted. Only 'contributor', 'subscriber' and your custom roles are allowed.", 'wp_rest_user'), array('status' => 400));
 					return $error;
 				} else {
 					// Silence is gold
@@ -124,11 +129,6 @@ class Wp_Rest_User_Public {
 				$user = get_user_by('id', $user_id);
 				$user->set_role($role);
 				// $user->set_role('subscriber');
-
-				// WooCommerce specific code
-				if (class_exists('WooCommerce')) {
-					$user->set_role('customer');
-				}
 
 				// Ger User Data (Non-Sensitive, Pass to front end.)
 				$response['code'] = 200;
