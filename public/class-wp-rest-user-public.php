@@ -85,7 +85,7 @@ class Wp_Rest_User_Public {
 		$username = sanitize_text_field($parameters['username']);
 		$email = sanitize_text_field($parameters['email']);
 		$password = sanitize_text_field($parameters['password']);
-		// $role = sanitize_text_field($parameters['role']);
+		$role = sanitize_text_field($parameters['role']);
 		$error = new WP_Error();
 
 		if (empty($username)) {
@@ -100,16 +100,21 @@ class Wp_Rest_User_Public {
 			$error->add(404, __("Password field 'password' is required.", 'wp-rest-user'), array('status' => 400));
 			return $error;
 		}
-		// if (empty($role)) {
-		// 	$role = 'subscriber';
-		// } else {
-		//     if ($GLOBALS['wp_roles']->is_role($role)) {
-		//     	// Silence is gold
-		//     } else {
-		// 		$error->add(405, __("Role field 'role' is not a valid. Check your User Roles from Dashboard.", 'wp_rest_user'), array('status' => 400));
-		// 		return $error;
-		//     }
-		// }
+		if (empty($role)) {
+			$role = 'subscriber';
+		} else {
+			if ($GLOBALS['wp_roles']->is_role($role)) {
+				if ($role == 'administrator' || 'Editor' || 'Author') {
+					$error->add(406, __("Role field 'role' is not a permitted. Only 'contributor' and 'subscriber' are allowed.", 'wp_rest_user'), array('status' => 400));
+					return $error;
+				} else {
+					// Silence is gold
+				}
+			} else {
+				$error->add(405, __("Role field 'role' is not a valid. Check your User Roles from Dashboard.", 'wp_rest_user'), array('status' => 400));
+				return $error;
+			}
+		}
 
 		$user_id = username_exists($username);
 		if (!$user_id && email_exists($email) == false) {
@@ -117,8 +122,8 @@ class Wp_Rest_User_Public {
 			if (!is_wp_error($user_id)) {
 				// Ger User Meta Data (Sensitive, Password included. DO NOT pass to front end.)
 				$user = get_user_by('id', $user_id);
-				// $user->set_role($role);
-				$user->set_role('subscriber');
+				$user->set_role($role);
+				// $user->set_role('subscriber');
 
 				// WooCommerce specific code
 				if (class_exists('WooCommerce')) {
