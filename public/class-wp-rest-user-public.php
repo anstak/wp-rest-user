@@ -104,7 +104,7 @@ class Wp_Rest_User_Public {
 			$role = 'subscriber';
 		} else {
 			if ($GLOBALS['wp_roles']->is_role($role)) {
-				if ($role == 'administrator' || 'Editor' || 'Author') {
+				if ($role == 'administrator' || $role == 'Editor' || $role == 'Author') {
 					$error->add(406, __($role . "Role field 'role' is not a permitted. Only 'contributor', 'subscriber' and your custom roles are allowed.", 'wp_rest_user'), array('status' => 400));
 					return $error;
 				} else {
