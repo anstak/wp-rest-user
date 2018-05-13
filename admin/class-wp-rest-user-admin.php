@@ -102,7 +102,6 @@ class Wp_Rest_User_Admin {
 	 */
 	public function add_settings_menu() {
 		add_options_page(
-		add_options_page(
 			'WP REST User - Registration',
 			'REST User',
 			'manage_options',
