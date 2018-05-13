@@ -119,7 +119,7 @@ class Wp_Rest_User_Admin {
 
 	}
 
-	function wptreehouse_badges_option_page() {
+	public function wptreehouse_badges_option_page() {
 		if (!current_user_can('manage_options')) {
 			wp_die('You do not have sufficient permission to acces this page.');
 		}
