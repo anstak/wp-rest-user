@@ -112,8 +112,9 @@ class Wp_Rest_User_Admin {
 			'WP REST User - Registration',
 			'REST User',
 			'manage_options',
-			plugin_dir_url(__FILE__) . 'admin/partials/wp-rest-user-admin-display.php',
-			'wp-rest-user'
+			'wp-rest-user',
+			'partials/wp-rest-user-admin-display.php',
+			'myplguin_admin_page'
 		);
 
 	}
