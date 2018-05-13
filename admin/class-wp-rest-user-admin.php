@@ -107,7 +107,7 @@ class Wp_Rest_User_Admin {
 			'REST User',
 			'manage_options',
 			$this->plugin_name,
-			array($'partials/wp-rest-user-admin-display.php', 'admin_page')
+			array('partials/wp-rest-user-admin-display.php', 'admin_page')
 		);
 
 	}
