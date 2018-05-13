@@ -63,6 +63,34 @@ class Wp_Rest_User_Admin {
 	 *
 	 * @since    1.1.1
 	 */
+	function admin_settings_init() {
+		// register a new setting for "wp-rest-user" page
+		register_setting($this->plugin_name, $this->plugin_name . '_options');
+
+		// register a new section in the "wporg" page
+		add_settings_section(
+			$this->plugin_name . '_section_roles',
+			__('Which roles are allowed for Registration?', $this->plugin_name),
+			$this->plugin_name . '_section_roles_callback',
+			$this->plugin_name
+		);
+
+		// register a new field in the "_section_roles" section, inside the "wp-rest-user" page
+		add_settings_field(
+			$this->plugin_name . '_field_roles', // as of WP 4.6 this value is used only internally
+			// use $args' label_for to populate the id inside the callback
+			__('Admin', $this->plugin_name),
+			$this->plugin_name . '_field_admin_callback',
+			$this->plugin_name,
+			$this->plugin_name . '_section_roles',
+			[
+				'label_for' => $this->plugin_name . '_field_roles',
+				'class' => 'wporg_row',
+				'wporg_custom_data' => 'custom',
+			]
+		);
+	}
+
 	function wporg_settings_init() {
 		// register a new setting for "wporg" page
 		register_setting('wporg', 'wporg_options');
