@@ -55,6 +55,20 @@ class Wp_Rest_User_Admin {
 	}
 
 	/**
+	 * Add Admin Menu
+	 *
+	 * @author Jack
+	 *
+	 * @see https://premium.wpmudev.org/blog/creating-wordpress-admin-pages/
+	 *
+	 * @since    1.1.1
+	 */
+	public function add_menu() {
+		add_menu_page('My Top Level Menu Example', 'Top Level Menu', 'manage_options', 'myplugin/myplugin-admin-page.php', 'myplguin_admin_page', 'dashicons-tickets', 6);
+		add_submenu_page('myplugin/myplugin-admin-page.php', 'My Sub Level Menu Example', 'Sub Level Menu', 'manage_options', 'myplugin/myplugin-admin-sub-page.php', 'myplguin_admin_sub_page');
+	}
+
+	/**
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since    1.1.0
