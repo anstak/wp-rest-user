@@ -2,6 +2,7 @@
 
 Update version number in /wp-rest-user.php
 
+> * Version:           x.x.x
 > define('PLUGIN_NAME_VERSION', 'x.x.x');
 
 # Git
@@ -23,5 +24,3 @@ Update version number in /wp-rest-user.php
 > svn add trunk/*.*
 ## Use SVN to commit new release
 > svn ci -m "Release x.x.x"
-
-
