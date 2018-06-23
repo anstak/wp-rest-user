@@ -9,19 +9,21 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
-WP REST User adds in the 'User Registration' function for REST API.
+WP REST User adds in the 'User Registration' or 'Retrieve Password' function for REST API.
  
 == Description ==
 
-If you wish to 'Register User' using REST API, *without* exposing Administrator credentials to the Front End application, you are at the right place. Since WordPress 4.7, REST API was natively included in WordPress. 
+If you wish to 'Register User' or 'Retrieve Password' using REST API, *without* exposing Administrator credentials to the Front End application, you are at the right place. Since WordPress 4.7, REST API was natively included in WordPress. 
 
-In order to 'Register User', the authentication for a user with 'Administrator' role is required. While this is a delibrately done for security reasons, such implementation makes it very hard for Front End applications to implement a simple 'Register' or 'Sign Up' function.
+In order to 'Register User' or 'Retrieve Password', the authentication for a user with 'Administrator' role is required. While this is a delibrately done for security reasons, such implementation makes it very hard for Front End applications to implement a simple 'Register' or 'Sign Up' function.
 
 This plugin fullfills such requirement by extending the existing WordPress REST API endpoints. 
 
 = Usage =
 
 Send a POST request to /wp-json/wp/v2/users/register, including a JSON body with three keys: username, email and password.
+
+Send a POST request to /wp-json/wp/v2/users/lostpassword, including a JSON body with three keys: user_login.
 
 See the Screenshot below for POSTMAN demo:
  
@@ -54,6 +56,10 @@ Issues and [pull requests](https://github.com/sk8-pty-ltd/wp-rest-user/pulls) ar
 1. An sample REST API POST request using [WP REST User](https://wordpress.org/plugins/wp-rest-user/).
  
 == Changelog ==
+
+= 1.3.0 = 
+
+* Added an end point for retrieve password email.
 
 = 1.2.1 = 
 
