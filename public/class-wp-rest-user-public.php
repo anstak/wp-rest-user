@@ -65,6 +65,10 @@ class Wp_Rest_User_Public {
 			'methods' => 'POST',
 			'callback' => array($this, 'register_user'),
 		));
+		register_rest_route('wp/v2', 'users/lostpassword', array(
+			'methods' => 'POST',
+			'callback' => array($this, 'lost_password'),
+		));
 	}
 
 	/**
@@ -140,6 +144,47 @@ class Wp_Rest_User_Public {
 			$error->add(406, __("Email already exists, please try 'Reset Password'", 'wp-rest-user'), array('status' => 400));
 			return $error;
 		}
+
+		return new WP_REST_Response($response, 200);
+	}
+
+	/**
+	 * Get the username or email in the request body and Send a Forgot Password email
+	 *
+	 * @author Jack
+	 *
+	 * @since    1.1.0
+	 *
+	 * @param [type] $request [description]
+	 *
+	 * @return [type] [description]
+	 */
+	public function lost_password($request = null) {
+
+		$response = array();
+		$parameters = $request->get_json_params();
+		$user_login = sanitize_text_field($parameters['user_login']);
+		$error = new WP_Error();
+
+		if (empty($user_login)) {
+			$error->add(400, __("The field 'user_login' is required.", 'wp-rest-user'), array('status' => 400));
+			return $error;
+		} else {
+			$user_id = username_exists($user_login);
+			if ($user_id == false) {
+				$user_id = email_exists($user_login)
+				if ($user_id == false) {
+					$error->add(401, __("User '" . $user_login . "' not found.", 'wp-rest-user'), array('status' => 400));
+					return $error;
+				}
+			}
+		}
+
+		// run the action 
+		do_action( 'retrieve_password', $user_user_login ); 
+
+		$response['code'] = 200;
+		$response['message'] = __("Reset Password link had been send to your email.", "wp-rest-user");
 
 		return new WP_REST_Response($response, 200);
 	}
