@@ -153,7 +153,7 @@ class Wp_Rest_User_Public {
 	 *
 	 * @author Jack
 	 *
-	 * @since    1.1.0
+	 * @since    1.3.0
 	 *
 	 * @param [type] $request [description]
 	 *
