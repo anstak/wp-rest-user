@@ -172,7 +172,7 @@ class Wp_Rest_User_Public {
 		} else {
 			$user_id = username_exists($user_login);
 			if ($user_id == false) {
-				$user_id = email_exists($user_login)
+				$user_id = email_exists($user_login);
 				if ($user_id == false) {
 					$error->add(401, __("User '" . $user_login . "' not found.", 'wp-rest-user'), array('status' => 400));
 					return $error;
@@ -180,8 +180,8 @@ class Wp_Rest_User_Public {
 			}
 		}
 
-		// run the action 
-		do_action( 'retrieve_password', $user_user_login ); 
+		// run the action
+		do_action('retrieve_password', $user_user_login);
 
 		$response['code'] = 200;
 		$response['message'] = __("Reset Password link had been send to your email.", "wp-rest-user");
