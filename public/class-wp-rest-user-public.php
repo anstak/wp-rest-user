@@ -181,7 +181,7 @@ class Wp_Rest_User_Public {
 		}
 
 		// run the action
-		do_action('retrieve_password', $user_user_login);
+		do_action('retrieve_password', $user_login);
 
 		$response['code'] = 200;
 		$response['message'] = __("Reset Password link had been send to your email.", "wp-rest-user");
