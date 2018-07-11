@@ -140,6 +140,9 @@ class Wp_Rest_User_Public {
 			} else {
 				return $user_id;
 			}
+		} else if ($user_id) {
+			$error->add(406, __("Username already exists, please enter another username", 'wp-rest-user'), array('status' => 400));
+			return $error;
 		} else {
 			$error->add(406, __("Email already exists, please try 'Reset Password'", 'wp-rest-user'), array('status' => 400));
 			return $error;
