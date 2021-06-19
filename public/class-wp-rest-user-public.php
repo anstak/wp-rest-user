@@ -132,8 +132,10 @@ class Wp_Rest_User_Public {
 				// Ger User Meta Data (Sensitive, Password included. DO NOT pass to front end.)
 				$user = get_user_by('id', $user_id);
 				$user->set_role($role);
+				do_action('wp_rest_user_create_user', $user); // Deprecated
+				do_action('wp_rest_user_user_register', $user);
 				// $user->set_role('subscriber');
-
+				do_action( 'rest_insert_user', $user, $request, true );
 				// Ger User Data (Non-Sensitive, Pass to front end.)
 				$response['code'] = 200;
 				$response['message'] = __("User '" . $username . "' Registration was Successful", "wp-rest-user");
